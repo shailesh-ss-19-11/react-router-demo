@@ -1,0 +1,1 @@
+export const BASEURL = "https://retoolapi.dev/FOdL5s/data"
