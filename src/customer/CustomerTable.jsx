@@ -26,7 +26,7 @@ const CustomerTable = ({ customerData }) => {
                                 <td>{customer.mobile}</td>
                                 <td>{customer.address}</td>
                                 <td>
-                                    <button className='btn btn-secondary btn-sm m-1' onClick={()=>navigate(`/customer/update/${customer.id}`)}>update</button>
+                                    <button className='btn btn-secondary btn-sm m-1' onClick={()=>navigate(`/customer/update/${customer.id}`,{state:customer})}>update</button>
                                     <button className='btn btn-danger btn-sm m-1'>delete</button>
                                     <button className='btn btn-primary btn-sm m-1' onClick={()=>navigate(`/customer/details/${customer.id}`)}>View Detail</button>
                                 </td>

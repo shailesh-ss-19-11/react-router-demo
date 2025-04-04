@@ -1,19 +1,48 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { BASEURL } from '../../AppConstants';
+import axios from 'axios';
 
-const UpdateCustomer = () => {
+const UpdateCustomer = (props) => {
+    // const location = useLocation();
     const params = useParams();
-    const [formData, setformData] = useState({});
+    const navigate = useNavigate();
+    // const [formData, setformData] = useState(location.state ? location.state : null);
+    const [formData, setformData] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setformData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.put(`${BASEURL}/${params.id}`, formData).then((resp) => {
+            console.log(resp)
+            if (resp.status === 200) {
+                navigate(-1)
+            }
+        })
     }
     console.log(formData);
+
+    const fetchCustomerData = () => {
+        axios.get(`${BASEURL}/${params.id}`).then((resp) => {
+            console.log(resp)
+            if (resp.status === 200) {
+                setformData(resp.data);
+            } else {
+                setformData(null)
+            }
+        }).catch((err) => {
+            console.log(err)
+            setformData(null)
+        })
+    }
+
+    useEffect(() => {
+        fetchCustomerData()
+    }, [])
     return (
         <div className='container'>
             <h1>Update Customer</h1>
@@ -28,7 +57,7 @@ const UpdateCustomer = () => {
                 </div>
                 <div className="mb-3">
                     <label for="mobile" className="form-label">Mobile</label>
-                    <input type="number" onChange={handleChange} name='mobile' value={formData?.mobile} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    <input type="text" onChange={handleChange} name='mobile' value={formData?.mobile} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                 </div>
                 <div className="mb-3">
                     <label for="address" className="form-label">Address</label>
