@@ -19,7 +19,7 @@ const CustomerTable = ({ customerData }) => {
                 {customerData && customerData.length > 0 ?
                     customerData.map((customer) => {
                         return (
-                            <tr>
+                            <tr key={customer.id}>
                                 <th scope="row">{customer.id}</th>
                                 <td>{customer.customer_name}</td>
                                 <td>{customer.email}</td>

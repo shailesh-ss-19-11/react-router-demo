@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import CustomerTable from './CustomerTable'
 import axios from 'axios';
 import { BASEURL } from '../../AppConstants';
+import { useNavigate } from 'react-router-dom';
 
 const Customer = () => {
+    const navigate = useNavigate();
     const [customerData, setcustomerData] = useState([]);
     const fetchData = () => {
         axios.get(BASEURL).then((response) => {
@@ -22,7 +24,10 @@ const Customer = () => {
     }, [])
     return (
         <>
-            <CustomerTable customerData={customerData}/>
+            <button className='btn btn-primary btn-md' onClick={()=>navigate(`add`)}>
+                Add Customer
+            </button>
+            <CustomerTable customerData={customerData} />
         </>
     )
 }

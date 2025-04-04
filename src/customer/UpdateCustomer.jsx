@@ -4,7 +4,8 @@ import { BASEURL } from '../../AppConstants';
 import axios from 'axios';
 
 const UpdateCustomer = (props) => {
-    // const location = useLocation();
+    const location = useLocation();
+    console.log(location,"location")
     const params = useParams();
     const navigate = useNavigate();
     // const [formData, setformData] = useState(location.state ? location.state : null);
