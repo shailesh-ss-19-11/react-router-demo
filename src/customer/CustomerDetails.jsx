@@ -3,8 +3,6 @@ import { useLocation, useParams } from 'react-router-dom'
 import { BASEURL } from '../../AppConstants';
 import axios from 'axios';
 import { getSingeEntityApi } from '../api/Api';
-import { notify } from '../components/toast';
-import { ToastContainer } from 'react-toastify';
 
 const CustomerDetails = () => {
   const [customerData, setcustomerData] = useState(null)
@@ -13,7 +11,6 @@ const CustomerDetails = () => {
   const fetchCustomerDetails = () => {
     getSingeEntityApi(params.id, (data) => {
       setcustomerData(data)
-
     }, (err) => {
       setcustomerData({})
     })
@@ -23,6 +20,7 @@ const CustomerDetails = () => {
     fetchCustomerDetails();
   }, [])
 
+  console.log(customerData)
   return (
     <>
       <div className="card" style={{ width: "18rem" }}>

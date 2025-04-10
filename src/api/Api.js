@@ -1,6 +1,5 @@
 import axios from "axios"
 import { BASEURL } from "../../AppConstants"
-import { notify } from "../components/toast"
 export const getApi = (params, success, error) => {
     axios.get(BASEURL).then((response) => {
         if (response.status === 200) {
@@ -26,7 +25,6 @@ export const postData = (data,success,error)=>{
     axios.post(BASEURL,data).then((resp)=>{
         if(resp.status===201){
             success(resp.data)
-            notify()
         }
     }).catch((err)=>{
         error(err)
