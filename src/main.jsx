@@ -1,6 +1,5 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,20 +10,31 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Navbar />
-      <Routes>
-        <Route path='/login' Component={Login}/>
-        {/* <Route path='/' element={<App />} /> */}
-        {/* <Route path='/' Component={App} /> */}
-        {
-          routes &&
-          routes.map((route) => {
-            return <Route path={route.path} element={
-            <Protected >
-              <route.component/> 
-            </Protected>} />
-          })
-        }
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path='/login' Component={Login} />
+          {/* <Route path='/' element={<App />} /> */}
+          {/* <Route path='/' Component={App} /> */}
+          {/* <Route path='/services/' Component={Services} >
+          <Route path='home-service' Component={HomeServices}/>
+        </Route> */}
+          {
+            routes &&
+            routes.map((route) => {
+              return (
+                // parent routes ///////////////////////////////////
+                <Route path={route.path} Component={route.component}>
+                  {/* //nested routes //////////////////// */}
+                  {route && route.children &&
+                    route.children.map((child) => {
+                      return <Route path={child.path} Component={child.component} />
+                    })}
+                </Route>
+              )
+            })
+          }
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   </StrictMode>,
 )
