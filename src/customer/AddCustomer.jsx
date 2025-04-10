@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { data, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { BASEURL } from '../../AppConstants';
 import axios from 'axios';
+import { postData } from '../api/Api';
 
 const AddCustomer = () => {
     const navigate = useNavigate();
@@ -14,11 +15,12 @@ const AddCustomer = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`${BASEURL}`, formData).then((resp) => {
-            console.log(resp)
-            if (resp.status === 201) {
+        postData(formData, (data) => {
+            if (data) {
                 navigate(-1)
             }
+        }, (err) => {
+            console.log(err)
         })
     }
 

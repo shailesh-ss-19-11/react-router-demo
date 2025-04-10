@@ -3,21 +3,18 @@ import CustomerTable from './CustomerTable'
 import axios from 'axios';
 import { BASEURL } from '../../AppConstants';
 import { useNavigate } from 'react-router-dom';
+import { getApi } from '../api/Api';
 
 const Customer = () => {
     const navigate = useNavigate();
     const [customerData, setcustomerData] = useState([]);
     const fetchData = () => {
-        axios.get(BASEURL).then((response) => {
-            if (response.status === 200) {
-                setcustomerData(response.data)
-            } else {
-                setcustomerData([])
-            }
-        }).catch((err) => {
-            setcustomerData([])
+        getApi("",(data)=>{
+            setcustomerData(data);
+        },(err)=>{
             console.log(err)
-        })
+            setcustomerData([])
+        });
     }
     useEffect(() => {
         fetchData()

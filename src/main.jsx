@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { routes } from './routes/Routes.js'
 import Protected from './protectAuth/Protected.jsx'
 import Login from './auth/Login.jsx'
+import { ToastContainer } from 'react-toastify';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
@@ -36,5 +37,6 @@ createRoot(document.getElementById('root')).render(
         </Routes>
       </Suspense>
     </BrowserRouter>
+    <ToastContainer />
   </StrictMode>,
 )
