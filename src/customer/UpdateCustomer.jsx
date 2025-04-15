@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { BASEURL } from '../../AppConstants';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { toastSuccess } from '../components/Toast';
 
 const UpdateCustomer = (props) => {
     const location = useLocation();
@@ -21,6 +23,7 @@ const UpdateCustomer = (props) => {
         axios.put(`${BASEURL}/${params.id}`, formData).then((resp) => {
             console.log(resp)
             if (resp.status === 200) {
+                toastSuccess('Updated Successfully!')
                 navigate(-1)
             }
         })

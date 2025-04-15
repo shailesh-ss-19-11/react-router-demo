@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BASEURL } from '../../AppConstants';
 import { useNavigate } from 'react-router-dom';
 import { getApi } from '../api/Api';
+import { toastError, toastSuccess } from '../components/Toast';
 
 const Customer = () => {
     const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Customer = () => {
         getApi(BASEURL,"",(data)=>{
             setcustomerData(data);
         },(err)=>{
-            console.log(err)
+            toastError(err.message)
             setcustomerData([])
         });
     }

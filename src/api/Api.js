@@ -2,7 +2,7 @@ import axios from "axios"
 export const getApi = (BASEURL,params, success, error) => {
     axios.get(BASEURL).then((response) => {
         if (response.status === 200) {
-            success(response.data)
+            success(response.data);
         }
     }).catch((err) => {
         error(err)
