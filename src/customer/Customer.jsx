@@ -9,7 +9,7 @@ const Customer = () => {
     const navigate = useNavigate();
     const [customerData, setcustomerData] = useState([]);
     const fetchData = () => {
-        getApi("",(data)=>{
+        getApi(BASEURL,"",(data)=>{
             setcustomerData(data);
         },(err)=>{
             console.log(err)

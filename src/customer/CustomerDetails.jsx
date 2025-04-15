@@ -9,7 +9,7 @@ const CustomerDetails = () => {
   const params = useParams();
 
   const fetchCustomerDetails = () => {
-    getSingeEntityApi(params.id, (data) => {
+    getSingeEntityApi(BASEURL,params.id, (data) => {
       setcustomerData(data)
     }, (err) => {
       setcustomerData({})

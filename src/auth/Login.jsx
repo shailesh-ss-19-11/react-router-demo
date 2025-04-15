@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const location= useLocation();
     const [formData, setformData] = useState({});
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -22,6 +23,7 @@ const Login = () => {
             }).catch((err) => {
                 alert("something went wrong...")
                 console.log("something went wrong....")
+                
             })
     }
     return (

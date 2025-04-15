@@ -24,7 +24,9 @@ createRoot(document.getElementById('root')).render(
 						routes.map((route) => {
 							return (
 								// parent routes ///////////////////////////////////
-								<Route path={route.path} element={<Protected>
+								<Route path={route.path} 
+                element={
+                <Protected>
 									<route.component/>
 								</Protected>}>
 									{/* //nested routes //////////////////// */}

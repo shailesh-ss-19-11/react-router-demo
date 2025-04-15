@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import Products from "../products/Products";
 
 const App = lazy(() => import("./../App"));
 const AddCustomer = lazy(() => import("../customer/AddCustomer"));
@@ -65,4 +66,8 @@ export const routes = [
     path: "/customer/update/:id",
     component: UpdateCustomer,
   },
+  {
+    path: "/products",
+    component: Products
+  }
 ];

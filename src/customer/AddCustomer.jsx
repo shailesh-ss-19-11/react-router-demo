@@ -15,7 +15,7 @@ const AddCustomer = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        postData(formData, (data) => {
+        postData(BASEURL,formData, (data) => {
             if (data) {
                 navigate(-1)
             }
