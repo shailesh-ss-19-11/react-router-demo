@@ -2,6 +2,7 @@ import { lazy } from "react";
 import Products from "../products/Products";
 import Dummy from "../dummycomp/Dummy";
 import Expo from "../MemoExperiment/Expo";
+import Card2 from "../MemoExperiment/Card2";
 
 const App = lazy(() => import("./../App"));
 const AddCustomer = lazy(() => import("../customer/AddCustomer"));
@@ -79,5 +80,8 @@ export const routes = [
   {
     path:"/memoexp",
     component:Expo
+  },{
+    path:"/usememoexp",
+    component:Card2
   }
 ];
