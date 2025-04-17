@@ -12,6 +12,11 @@ const Card2 = () => {
     return count * 2;
   }, [count]);
 
+// const doubleCount = ()=>{
+//     console.log("object")
+//     return count*2
+// }
+
   return (
     <div>
       <input type="text" onChange={(e) => setName(e.target.value)} />
