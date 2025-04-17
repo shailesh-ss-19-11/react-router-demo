@@ -1,11 +1,16 @@
-import React from 'react'
-
-const Card1 = ({check1}) => {
+import React from "react";
+import { memo } from "react";
+const Card1 = ({ state1 }) => {
+  console.log("card1 called");
   return (
-    <div style={{width:"400px",height:"400px",background:check1 ? "red":"green"}}>
-      Card1
-    </div>
-  )
-}
+    <div
+      style={{
+        width: "400px",
+        height: "400px",
+        background: state1 ? "red" : "green",
+      }}
+    ></div>
+  );
+};
 
-export default Card1
+export default memo(Card1);
