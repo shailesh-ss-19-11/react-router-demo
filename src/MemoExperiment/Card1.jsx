@@ -1,6 +1,7 @@
 import React from "react";
 import { memo } from "react";
-const Card1 = ({ state1 }) => {
+const Card1 = ({ state1,xyz }) => {
+  xyz();
   console.log("card1 called");
   return (
     <div

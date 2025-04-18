@@ -3,6 +3,7 @@ import Products from "../products/Products";
 import Dummy from "../dummycomp/Dummy";
 import Expo from "../MemoExperiment/Expo";
 import Card2 from "../MemoExperiment/Card2";
+import Counter from "../usecallbackexp/Counter";
 
 const App = lazy(() => import("./../App"));
 const AddCustomer = lazy(() => import("../customer/AddCustomer"));
@@ -83,5 +84,9 @@ export const routes = [
   },{
     path:"/usememoexp",
     component:Card2
+  }
+  ,{
+    path:"/usecallbackexp",
+    component:Counter
   }
 ];
