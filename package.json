@@ -12,12 +12,14 @@
   "dependencies": {
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
+    "formik": "^2.4.6",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.1",
     "react-routing-app": "file:",
-    "react-toastify": "^11.0.5"
+    "react-toastify": "^11.0.5",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

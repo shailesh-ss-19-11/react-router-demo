@@ -1,55 +1,122 @@
-import React, {  useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { postData } from '../api/Api';
-import { toastError, toastSuccess } from '../components/Toast';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { postData } from "../api/Api";
+import { toastError, toastSuccess } from "../components/Toast";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { BASEURL } from "../../AppConstants";
 
 const AddCustomer = () => {
-	const navigate = useNavigate();
-	const [formData, setformData] = useState({});
+  const navigate = useNavigate();
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setformData({ ...formData, [name]: value });
-	};
+  const initialValues = {
+    customer_name: "",
+    email: "",
+    mobile: "",
+    address: "",
+  };
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		postData(formData, (data) => {
-            console.log(data)
-			if (data) {
-				toastSuccess("Customer Added")
-				navigate(-1)
-			}
-		}, (err) => {
-            toastError(err.message)
-			console.log(err)
-		})
-	}
+  const validationSchema = Yup.object({
+    customer_name: Yup.string().min(5, "Min 5 characters").max(50, "Max 50 characters").required("Customer name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    mobile: Yup.string().matches(/^\d{10}$/, "Mobile must be 10 digits").required("Mobile is required"),
+    address: Yup.string().min(16, "Address should be at least 16 characters").required("Address is required"),
+  });
 
-	return (
-		<div className='container'>
-			<h1>Add Customer</h1>
-			<form action="" onSubmit={handleSubmit}>
-				<div className="mb-3">
-					<label htmlFor="customername" className="form-label">Customer Name</label>
-					<input type="text" onChange={handleChange} name='customer_name' defaultValue={formData?.customer_name} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-				</div>
-				<div className="mb-3">
-					<label for="email" className="form-label">Email</label>
-					<input type="email" onChange={handleChange} name='email' defaultValue={formData?.email} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-				</div>
-				<div className="mb-3">
-					<label for="mobile" className="form-label">Mobile</label>
-					<input type="text" onChange={handleChange} name='mobile' defaultValue={formData?.mobile} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-				</div>
-				<div className="mb-3">
-					<label for="address" className="form-label">Address</label>
-					<input type="text" onChange={handleChange} name='address' defaultValue={formData?.address} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-				</div>
-				<input type="submit" onChange={handleChange} defaultValue={"Submit"} className='btn btn-sm btn-success' />
-			</form>
-		</div>
-	)
-}
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      postData(
+		BASEURL,
+        values,
+        (data) => {
+          if (data) {
+            toastSuccess("Customer Added");
+            navigate(-1);
+          }
+        },
+        (err) => {
+          toastError(err.message);
+        }
+      );
+    },
+  });
 
-export default AddCustomer
+  return (
+    <div className="container">
+      <h1>Add Customer</h1>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="customer_name" className="form-label">Customer Name</label>
+          <input
+            type="text"
+            name="customer_name"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.customer_name}
+            className="form-control"
+            id="customer_name"
+          />
+          {formik.touched.customer_name && formik.errors.customer_name && (
+            <p className="text-danger">{formik.errors.customer_name}</p>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            className="form-control"
+            id="email"
+          />
+          {formik.touched.email && formik.errors.email && (
+            <p className="text-danger">{formik.errors.email}</p>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="mobile" className="form-label">Mobile</label>
+          <input
+            type="text"
+            name="mobile"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.mobile}
+            className="form-control"
+            id="mobile"
+          />
+          {formik.touched.mobile && formik.errors.mobile && (
+            <p className="text-danger">{formik.errors.mobile}</p>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="address" className="form-label">Address</label>
+          <input
+            type="text"
+            name="address"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.address}
+            className="form-control"
+            id="address"
+          />
+          {formik.touched.address && formik.errors.address && (
+            <p className="text-danger">{formik.errors.address}</p>
+          )}
+        </div>
+
+        <button type="submit" className="btn btn-sm btn-success">
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default AddCustomer;

@@ -1,0 +1,1 @@
+import{j as e}from"./index-Btr1b6O6.js";const r=o=>(console.log(o),e.jsx("div",{children:"AboutInfo"})),n=()=>e.jsx("div",{children:"CareerInfo"}),t=()=>e.jsxs("div",{children:["About",e.jsx(r,{name:"shailesh",children:e.jsx(n,{age:25})})]});export{t as default};

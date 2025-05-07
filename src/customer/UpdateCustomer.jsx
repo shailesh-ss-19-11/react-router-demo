@@ -9,6 +9,7 @@ const UpdateCustomer = (props) => {
     const location = useLocation();
     console.log(location,"location")
     const params = useParams();
+    console.log("🚀 ~ UpdateCustomer ~ params:", params)
     const navigate = useNavigate();
     // const [formData, setformData] = useState(location.state ? location.state : null);
     const [formData, setformData] = useState(null);
